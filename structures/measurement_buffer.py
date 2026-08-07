@@ -26,7 +26,7 @@ class MeasurementBuffer:
         # Eğer buffer tamamen doluysa, en eski elemanın sıcaklığını toplamdan çıkarıyoruz
         if len(self._buffer) == self._max_size:
             oldest_measurement = self._buffer[0]
-            self._running_sum -= oldest_measurement.temperature  # .value yerine .temperature
+            self._running_sum -= oldest_measurement.temperature  
 
         # Yeni ölçümü ekleyip sıcaklığını toplama dahil ediyoruz
         self._buffer.append(measurement)
