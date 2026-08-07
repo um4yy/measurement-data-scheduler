@@ -13,7 +13,7 @@ def test_measurement_immutability():
 
 
 def test_add_and_get_by_id():
-  """Başarılı ekleme ve ID ile O(1) erişimi test eder."""
+  """Başarili ekleme ve ID ile O(1) erişimi test eder."""
   repo = MeasurementRepository()
   m1 = Measurement('M1', 'S1', 1700000000.0, 25.5, 5.0)
   repo.add(m1)
@@ -24,7 +24,7 @@ def test_add_and_get_by_id():
 
 
 def test_duplicate_measurement_error():
-  """Aynı ID ikinci kez eklendiğinde DuplicateMeasurementError fırlatıldığını doğrular."""
+  """Ayni ID ikinci kez eklendiğinde DuplicateMeasurementError firlatildigini doğrular."""
   repo = MeasurementRepository()
   m1 = Measurement('M1', 'S1', 1700000000.0, 25.5, 5.0)
   m2 = Measurement('M1', 'S2', 1700000005.0, 26.0, 5.1)
@@ -35,7 +35,7 @@ def test_duplicate_measurement_error():
 
 
 def test_get_unique_sample_ids():
-  """Set yapısının benzersiz sample_id topladığını doğrular."""
+  """Set yapisinin benzersiz sample_id toplandiğini doğrular."""
   repo = MeasurementRepository()
   repo.add(Measurement('M1', 'SAMPLE_A', 1700000000.0, 25.5, 5.0))
   repo.add(Measurement('M2', 'SAMPLE_B', 1700000001.0, 26.0, 5.1))
