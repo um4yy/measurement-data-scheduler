@@ -1,6 +1,43 @@
 from models.measurement import Measurement
 from models.exceptions import DuplicateMeasurementError
 from services.repository import MeasurementRepository
+# --- 4. Gün Importları ---
+from models.experiment_task import ExperimentTask
+from structures.task_scheduler import TaskScheduler
+from models.exceptions import EmptySchedulerError
+
+
+def run_day4_simulation():
+    print("\n" + "="*40)
+    print("=== DENEY ZAMANLAYICI (4. GÜN - HEAP SCHEDULER) ===")
+    print("="*40 + "\n")
+
+    scheduler = TaskScheduler()
+
+    # Görevler oluşturuluyor (1: Acil, 5: Normal, 10: Düşük)
+    t1 = ExperimentTask("TASK-001", "SMP-A1", 5, "Normal Sıcaklık Ölçümü - 1")
+    t2 = ExperimentTask("TASK-002", "SMP-A2", 5, "Normal Sıcaklık Ölçümü - 2")
+    t_urgent = ExperimentTask("TASK-999", "SMP-ALARM", 1, "GÜVENLİK ALARMI: Yüksek Voltaj")
+    t_routine = ExperimentTask("TASK-003", "SMP-R1", 10, "Rutin Cihaz Kalibrasyonu")
+
+    print("📥 Görevler kuyruğa ekleniyor...")
+    scheduler.add_task(t1)        # Priority: 5 (İlk eklendi)
+    scheduler.add_task(t2)        # Priority: 5 (İkinci eklendi - FIFO)
+    scheduler.add_task(t_routine) # Priority: 10
+    scheduler.add_task(t_urgent)  # Priority: 1 (Son eklendi ama EN ACİL!)
+
+    print(f" Toplam Bekleyen Görev: {scheduler.pending_count()}\n")
+
+    # Lazy Deletion Testi
+    print("🚫 'TASK-002' görevi iptal ediliyor (Lazy Deletion)...")
+    scheduler.cancel_task("TASK-002")
+    print(f" İptal sonrası aktif bekleyen: {scheduler.pending_count()}\n")
+
+    # Görevleri Öncelik Sırasına Göre Çalıştırma
+    print("⚡ GÖREV İŞLEME AKIŞI:")
+    while not scheduler.is_empty():
+        task = scheduler.get_next_task()
+        print(f"  -> [ÇALIŞTIRILDI] ID: {task.task_id} | Öncelik: {task.priority} | Açıklama: {task.description}")
 
 
 def main():
@@ -46,6 +83,7 @@ def main():
     except DuplicateMeasurementError as e:
         print(f"   Hata Yakalandı (Beklenen Davranış): {e}")
 
+run_day4_simulation()
 
 if __name__ == "__main__":
     main()
