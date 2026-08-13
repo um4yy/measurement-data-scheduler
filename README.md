@@ -6,7 +6,7 @@ Bu proje, yüksek hacimli ölçüm verilerinin işlenmesi, öncelikli görevleri
 
 ##  Sistem Mimarisi ve Tasarım Kararları
 
-Sistemin merkezinde, tüm alt modülleri orkestre eden **`ExperimentManager`** bulunmaktadır. `ExperimentManager`, bağımlılıkları kendi içinde üretmek yerine **Dependency Injection (DI)** prensibiyle dışarıdan alır ve **Composition** ilişkisi kurar.
+Sistemin merkezinde, tüm alt modülleri orkestre eden **`ExperimentManager`** bulunmaktadır. `ExperimentManager`, bağımlılıkları kendi içinde üretmek yerine **Dependency Injection (DI)** prensibiyle dışarıdan alır ve **Composition** ilişkisi kurar..
 
 ```text
                     +-----------------------+
